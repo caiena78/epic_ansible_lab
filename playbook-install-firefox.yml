@@ -13,4 +13,12 @@
         product_id: Mozilla Firefox
         arguments: '-ms'  # -ms enables silent installation
         state: present
+
+    - name: Install RSAT stuff
+      ansible.windows.win_feature:
+        name: "{{item}}"
+        state: present
+      loop: "{{rsat_tools}}"
+        
+      
 ...

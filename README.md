@@ -40,7 +40,7 @@ ansible -i inventory.azure_rm.yml -m ansible.windows.win_ping azwu2nhsw001
 
 ## Ping Linux Server
 ```
-ansible -i inventory.azure_rm.yml -m ansible.builtin.ping ODBTST
+ansible -i inventory.azure_rm.yml -m ansible.windows.win_ping azwu2nhsw001
 ansible -i inventory.azure_rm.yml -m ansible.builtin.ping -e "ansible_connection=local" ansible01
 ```
 
