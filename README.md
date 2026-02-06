@@ -1,0 +1,93 @@
+## Initialize git
+```
+git config --global user.email "caiena78@gmail.com"
+git config --global user.name "Chad Aiena"
+```
+
+## Activate Virtual Env
+```
+source ~/venv/azure/bin/activate
+```
+
+## Install Ansible Dependencies (if not already done)
+```
+pip install pypsrp pywinrm
+ansible-galaxy collection install ansible.windows # trippsc2.cis 
+```
+
+## Install Azure Dependencies
+```
+ansible-galaxy collection install azure.azcollection
+pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt
+```
+
+## Define Env Vars
+```
+. .env
+```
+
+## Ansible Inventory
+```
+ansible-inventory -i inventory.yml --limit dbservers --graph
+ansible-inventory -i inventory.yml --list --yaml
+ansible-inventory -i inventory.azure_rm.yml --list --yaml
+```
+
+## Ping Windows Server
+```
+ansible -i inventory.azure_rm.yml -m ansible.windows.win_ping azwu2nhsw001
+```
+
+## Ping Linux Server
+```
+ansible -i inventory.azure_rm.yml -m ansible.builtin.ping ODBTST
+ansible -i inventory.azure_rm.yml -m ansible.builtin.ping -e "ansible_connection=local" ansible01
+```
+
+## Install IIS
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=windows playbook-install-iis.yml # run twice to test idempotency
+```
+
+## Apply CIS Hardening (Using Ansible Role)
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=windows playbook-windows-cis-hardening.yml
+```
+
+## Apply StorageDsc Configuration
+```
+## install prerequisites
+# ansible-galaxy role install -r roles/requirements.yml --force
+# ansible-galaxy collection install community.windows
+ansible-playbook -i inventory.azure_rm.yml --limit=windows playbook-provision-storage.yml
+```
+
+## Provision Ansible Users
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=ansible01 -e "ansible_connection=local" -e @extra_vars/users.yml playbook-provision-ansible-ssh-users.yml --become
+```
+
+## Show host vars
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=azwu2nhsw001 playbook-show-host-vars.yml
+```
+
+## Show gathered facts
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=azwu2nhsw001 playbook-show-gathered-facts.yml
+```
+
+## Create a directory on Linux
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=ODBTST playbook-create-directory-linux.yml
+```
+
+## Create a directory on Windows
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=azwu2nhsw001 playbook-create-directory-windows.yml
+```
+
+## Install Firefox on a Windows Machine
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=azwu2nhsw001 playbook-install-firefox.yml
+```
