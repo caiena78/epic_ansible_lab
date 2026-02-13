@@ -6,4 +6,14 @@ rsat_tools:
   - RSAT-AD-Tools
   - RSAT-AD-PowerShell
   - RSAT-DNS-Server
- 
+
+temp_dir: "C:\\temp"
+# Notepad++
+npp_url: "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.1/npp.8.9.1.Installer.x64.msi"
+npp_msi: "C:\\temp\\npp.8.9.1.Installer.x64.msi"
+npp_exe: "C:\\Program Files\\Notepad++\\notepad++.exe"
+
+# KDiff3 (LO4D direct download link provided)
+kdiff_url: "https://download.kde.org/stable/kdiff3/kdiff3-1.12.1-windows-x86_64.exe"
+kdiff_installer: "C:\\temp\\kdiff3-1.12.1-windows-x86_64.exe"
+kdiff_exe: "C:\\Program Files\\KDiff3\\kdiff3.exe"

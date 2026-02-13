@@ -2,6 +2,13 @@
 - name: Install Firefox on Windows
   hosts: all
   tasks:
+    
+    - name: Ensure C:\temp exists
+      ansible.windows.win_file:
+        path: "{{ temp_dir }}"
+        state: directory
+
+
     - name: Download Firefox Installer
       win_get_url:
         url: https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US
@@ -19,6 +26,30 @@
         name: "{{item}}"
         state: present
       loop: "{{rsat_tools}}"
-        
-      
+
+
+    # - name: Download Notepad++ MSI to C:\temp
+    #   ansible.windows.win_get_url:
+    #     url: "{{ npp_url }}"
+    #     dest: "{{ npp_msi }}"
+
+    # - name: Install Notepad++ from MSI
+    #   ansible.windows.win_package:
+    #     path: "{{ npp_msi }}"
+    #     state: present
+    #     creates_path: "{{ npp_exe }}"
+
+    # - name: Download KDiff3 EXE to C:\temp 
+    #   ansible.windows.win_get_url:
+    #     url: "{{ kdiff_url }}"
+    #     dest: "{{ kdiff_installer }}"
+    #     follow_redirects: all
+
+    # - name: Install KDiff3 silently
+    #   ansible.windows.win_package:
+    #     path: "{{ kdiff_installer }}"
+    #     arguments: /S
+    #     state: present
+    #     creates_path: "{{ kdiff_exe }}"
+     
 ...

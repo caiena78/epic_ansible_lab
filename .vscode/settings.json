@@ -1,0 +1,4 @@
+{
+    "ansible.python.interpreterPath": "/home/ansible/venv/azure/bin/python",
+    "ansible.python.activationScript": "/home/ansible/venv/azure/bin/activate"
+}
