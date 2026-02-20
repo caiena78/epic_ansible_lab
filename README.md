@@ -91,3 +91,9 @@ ansible-playbook -i inventory.azure_rm.yml --limit=azwu2nhsw001 playbook-create-
 ```
 ansible-playbook -i inventory.azure_rm.yml --limit=azwu2nhsw001 playbook-install-firefox.yml
 ```
+
+
+## Run Windows
+```
+ansible-playbook -i inventory.azure_rm.yml --limit=azwu2nhsw001 playbook-windows-installer.yml
+```
